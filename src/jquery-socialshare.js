@@ -1,3 +1,32 @@
+/* =========================================================
+ * jquery-socialshare.js
+ * Repo: https://github.com/pnmcosta/jquery-socialshare
+ * Demo: https://pnmcosta.github.io/jquery-socialshare/
+ * Docs: https://github.com/pnmcosta/jquery-socialshare
+ * =========================================================
+ * Licensed under the MIT License (https://opensource.org/licenses/MIT)
+ * 
+ * Copyright (c) 2017 Pedro Costa
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * ========================================================= */
+
 ; (function ($, window, document) {
 
     "use strict";
@@ -6,13 +35,11 @@
     var $head = $(document.head);
 
     var defaults = {
-        /* global options */
         usePopup: true,
         popupWidth: 600,
         popupHeight: 450,
         ariaLabelPrefix: 'Share with',
 
-        /* default options */
         url: location.href,
         siteUrl: location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''),
         source: $head.find('[name=site], [name=Site]').prop('content') || document.title,
@@ -22,18 +49,14 @@
         price: $head.find("[property='og:product:price:amount']").prop("content") || '',
         template: null,
 
-        /* custom selectors */
         imageSelector: null,
         priceSelector: null,
 
-        /* email specific properties */
         emailSubject: 'I\'m sharing "{{TITLE}}" with you',
         emailBody: 'Because I think you\'ll find it very interesting.%0A%0A"{{DESCRIPTION}}"%0A%0AClick this link {{URL}} for more info.',
 
-        /* twitter specific properties */
         twitterSource: ($head.find("[name='twitter:site'], [property='name:creator']").prop("content") || '').replace('@', ''),
 
-        /* events */
         onOpen: function () { },
         onClose: function () { },
     };
@@ -43,7 +66,7 @@
     var timerOptions = {
         internal: 200,
         counter: 100 // timeout in 20000ms
-    }
+    };
 
     var opts_from_el = function (el, prefix) {
         var data = $(el).data(),
@@ -53,13 +76,15 @@
         function re_lower(_, a) {
             return a.toLowerCase();
         }
-        for (var key in data)
-            if (prefix.test(key)) {
-                inkey = key.replace(replace, re_lower);
-                out[inkey] = data[key];
+        for (var key in data) {
+            if (!prefix.test(key)) {
+                continue;
             }
+            inkey = key.replace(replace, re_lower);
+            out[inkey] = data[key];
+        }
         return out;
-    }
+    };
 
     var set_el_share = function () {
         this.templateName = this.settings.template;
@@ -82,7 +107,7 @@
                 console.error('[jqss] Could not find a template to use for element:');
                 console.log(this.element);
                 if (this._isAnchor) {
-                    this.$element.prop('href', 'javascript:;');
+                    this.$element.prop('href', '#');
                 }
                 return;
             }
@@ -95,14 +120,14 @@
             console.error('[jqss] Could not find template "' + this.templateName + '" for element:');
             console.log(this.element);
             if (this._isAnchor) {
-                this.$element.prop('href', 'javascript:;');
+                this.$element.prop('href', '#');
             }
             return;
         }
 
         // handle the special case for email template
         if ('email' === this.templateName) {
-            this.template = emailTemplate.replace('{{SUBJECT}}', this.settings.emailSubject).replace('{{BODY}}', this.settings.emailBody)
+            this.template = emailTemplate.replace('{{SUBJECT}}', this.settings.emailSubject).replace('{{BODY}}', this.settings.emailBody);
         }
 
         // if a custom imageSelector is set, ensure it updates the image setting
@@ -152,7 +177,7 @@
 
         // ensure this option is not set as a js option.
         options.template = null;
-        
+
         // Options priority: js options, element data attrs, defaults
         var elopts = opts_from_el(this.$element, pluginName);
         this.settings = $.extend({}, defaults, elopts, options);
@@ -186,9 +211,9 @@
             }
         },
         open: function (callsback) {
-            if (!this.enabled || 'email' === this.settings.template)
+            if (!this.enabled || 'email' === this.settings.template) {
                 return this.$element;
-
+            }
             callsback = 'undefined' !== callsback ? callsback : false;
 
             if (this.settings.usePopup) {
@@ -233,15 +258,17 @@
             return this.$element;
         },
         close: function (callsback) {
-            if ((!this.enabled || (this._shareWin || this._shareWin.closed === false)) || 'email' === this.settings.template)
+            if ((!this.enabled || (this._shareWin || this._shareWin.closed === false)) || 'email' === this.settings.template) {
                 return this.$element;
+            }
 
             callsback = 'undefined' !== callsback ? callsback : false;
 
             this._shareWin.close();
 
-            if (callbacks)
+            if (callsback) {
                 this.settings.onClose.apply(undefined, this, this.$element);
+            }
 
             return this.$element;
         }
@@ -256,12 +283,12 @@
 
         var _items = this.each(function () {
             var _plugin = $.data(this, "plugin_" + pluginName);
-            if ('undefined' == typeof _plugin) {
+            if ('undefined' === typeof _plugin) {
                 _plugin = new jqssPlugin(this, options);
                 $.data(this, "plugin_" + pluginName, _plugin);
             }
 
-            if ('string' == typeof options && 'function' == typeof _plugin[options]) {
+            if ('string' === typeof options && 'function' === typeof _plugin[options]) {
                 _return = _plugin[options].apply(_plugin, args);
             }
         });
@@ -289,7 +316,7 @@
         reddit: 'http://www.reddit.com/submit?url={{URL}}&title={{TITLE}}',
         stumbleupon: 'http://www.stumbleupon.com/submit?url={{URL}}&title={{TITLE}}',
         tumblr: 'http://tumblr.com/widgets/share/tool?canonicalUrl={{URL}}',
-        email: 'javascript:;',
+        email: '#',
         linkedin: 'http://www.linkedin.com/shareArticle?mini=true&ro=true&title={{TITLE}}&url={{URL}}&summary={{DESCRIPTION}}&source={{SOURCE}}&armin=armin',
         facebook: 'https://www.facebook.com/sharer/sharer.php?u={{URL}}',
         twitter: 'https://twitter.com/intent/tweet?text={{TITLE}}&url={{URL}}&via={{TWITTERSOURCE}}',
