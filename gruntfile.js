@@ -16,37 +16,25 @@ module.exports = function (grunt) {
 
         clean: ['dist/*'],
 
-        jshint: {
+        eslint: {
             options: {
-                jshintrc: '.jshintrc'
+
+                // See https://github.com/sindresorhus/grunt-eslint/issues/119
+                quiet: true
             },
-            main: {
-                src: 'src/jquery-socialshare.js'
+            dev: {
+                src: ["src/**/*.js", "Gruntfile.js"]
             },
-            gruntfile: {
-                options: {
-                    jshintrc: '.jshintrc-grunt'
-                },
-                src: 'gruntfile.js'
-            }
-        },
-        jscs: {
-            options: {
-                config: 'src/.jscsrc'
-            },
-            main: {
-                src: 'src/jquery-socialshare.js'
-            },
-            gruntfile: {
-                src: 'gruntfile.js'
+            dist: {
+                src: "dist/<%= pkg.name %>.js"
             }
         },
         concat: {
             options: {
                 stripBanners: true
             },
-            main: {
-                src: 'src/jquery-socialshare.js',
+            dev: {
+                src: 'src/<%= pkg.name %>.js',
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
@@ -54,8 +42,8 @@ module.exports = function (grunt) {
             options: {
                 preserveComments: 'some'
             },
-            main: {
-                src: '<%= concat.main.dest %>',
+            dev: {
+                src: '<%= concat.dev.dest %>',
                 dest: 'dist/<%= pkg.name %>.min.js'
             }
         },
@@ -117,14 +105,8 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            gruntfile: {
-                files: 'gruntfile.js',
-                tasks: ['jshint:gruntfile'/*, 'jscs:gruntfile'*/]
-            },
-            main: {
-                files: ['src/*.js'],
-                tasks: ['jshint:main'/*, 'jscs:main'*/]
-            }
+            files: [ "<%= eslint.dev.src %>" ],
+			tasks: [ "eslint:dev" ]
         }
     });
 
@@ -133,7 +115,7 @@ module.exports = function (grunt) {
 
 
     // distribution task.
-    grunt.registerTask('dist', ['clean:dist', 'concat:main', 'uglify:main', 'usebanner:dist', 'compress:dist']);
+    grunt.registerTask('dist', ['clean:dist', 'eslint:dist', 'concat:dev', 'uglify:dev', 'usebanner:dist', 'compress:dist']);
 
     // Version numbering task.
     // grunt bump-version --newver=X.Y.Z

@@ -31,8 +31,8 @@
 
     "use strict";
 
-    var pluginName = "jqss";
-    var $head = $(document.head);
+    var pluginName = "jqss",
+        $head = $(document.head);
 
     var defaults = {
         usePopup: true,
@@ -58,7 +58,7 @@
         twitterSource: ($head.find("[name='twitter:site'], [property='name:creator']").prop("content") || '').replace('@', ''),
 
         onOpen: function () { },
-        onClose: function () { },
+        onClose: function () { }
     };
 
     var emailTemplate = 'mailto:?subject={{SUBJECT}}&body={{BODY}}';
@@ -68,25 +68,25 @@
         counter: 100 // timeout in 20000ms
     };
 
-    var opts_from_el = function (el, prefix) {
+    var getElementOptions = function (el, prefix) {
         var data = $(el).data(),
             out = {}, inkey,
             replace = new RegExp('^' + prefix.toLowerCase() + '([A-Z])');
         prefix = new RegExp('^' + prefix.toLowerCase());
-        function re_lower(_, a) {
+        function reLower(_, a) {
             return a.toLowerCase();
         }
         for (var key in data) {
             if (!prefix.test(key)) {
                 continue;
             }
-            inkey = key.replace(replace, re_lower);
+            inkey = key.replace(replace, reLower);
             out[inkey] = data[key];
         }
         return out;
     };
 
-    var set_el_share = function () {
+    var setElementShare = function () {
         this.templateName = this.settings.template;
 
         // determine template from class if not yet set in settings
@@ -179,7 +179,7 @@
         options.template = null;
 
         // Options priority: js options, element data attrs, defaults
-        var elopts = opts_from_el(this.$element, pluginName);
+        var elopts = getElementOptions(this.$element, pluginName);
         this.settings = $.extend({}, defaults, elopts, options);
         this.enabled = false;
         this.template = null;
@@ -197,7 +197,7 @@
 
     $.extend(jqssPlugin.prototype, {
         init: function () {
-            set_el_share.call(this);
+            setElementShare.call(this);
 
             // handle click if enabled and not email template
             if (this.enabled && 'email' !== this.settings.template) {

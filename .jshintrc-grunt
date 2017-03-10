@@ -1,8 +1,0 @@
-{
-  "extends": ".jshintrc",
-  "asi": false,
-  "browser": false,
-  "esversion": 3,
-  "node": true,
-  "jquery": false
-}

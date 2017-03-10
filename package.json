@@ -31,14 +31,14 @@
     "jquery": ">=1.9.1"
   },
   "devDependencies": {
+    "eslint-config-jquery": "1.0.0",
     "grunt": "latest",
     "grunt-banner": "^0.6.0",
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-jshint": "latest",
     "grunt-contrib-uglify": "^2.2.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-jscs": "^3.0.1",
+    "grunt-eslint": "19.0.0",
     "grunt-string-replace": "latest",
     "load-grunt-tasks": "latest",
     "time-grunt": "^1.4.0"
