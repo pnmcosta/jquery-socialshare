@@ -14,12 +14,12 @@
 
         /* default options */
         url: location.href,
-        siteUrl: location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: ''),
+        siteUrl: location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''),
         source: $head.find('[name=site], [name=Site]').prop('content') || document.title,
         title: $head.find('[name=title], [name=Title]').prop('content') || document.title,
-        description: $head.find("[name=description], [name=Description], meta[property='og:description'], meta[property='og:Description']").attr('content') || document.title,
-        image: $head.find("meta[name=image], meta[name=Image], meta[property='og:image'], meta[property='og:Image']").prop("content") || $('img:first').prop('src') || '',
-        price: $head.find("meta[property='og:product:price:amount']").prop("content") || '',
+        description: $head.find("[name=description], [name=Description], [property='og:description'], [property='og:Description']").attr('content') || document.title,
+        image: $head.find("[name=image], [name=Image], [property='og:image'], [property='og:Image']").prop("content") || $('img:first').prop('src') || '',
+        price: $head.find("[property='og:product:price:amount']").prop("content") || '',
         template: null,
 
         /* custom selectors */
@@ -31,7 +31,7 @@
         emailBody: 'Because I think you\'ll find it very interesting.%0A%0A"{{DESCRIPTION}}"%0A%0AClick this link {{URL}} for more info.',
 
         /* twitter specific properties */
-        twitterSource: ($head.find("meta[name='twitter:site'], meta[property='name:creator']").prop("content") || '').replace('@', ''),
+        twitterSource: ($head.find("[name='twitter:site'], [property='name:creator']").prop("content") || '').replace('@', ''),
 
         /* events */
         onOpen: function () { },
@@ -150,9 +150,11 @@
         this.element = element;
         this.$element = $(this.element);
 
-        var elopts = opts_from_el(this.$element, pluginName);
-
+        // ensure this option is not set as a js option.
+        options.template = null;
+        
         // Options priority: js options, element data attrs, defaults
+        var elopts = opts_from_el(this.$element, pluginName);
         this.settings = $.extend({}, defaults, elopts, options);
         this.enabled = false;
         this.template = null;

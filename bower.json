@@ -6,7 +6,7 @@
     "Pedro Costa"
   ],
   "homepage": "http://pnmcosta.github.io/jquery-socialshare",
-  "description": "jquery-socialshare is simple and flexible social share jQuery plugin for any HTML anchor or buttons.",
+  "description": "jquery-socialshare is a simple and flexible social share jQuery plugin for any HTML anchor or buttons.",
   "main": "./dist/jquery-socialshare.js",
   "dependencies": {
     "jquery": ">=1.9.1"
@@ -15,7 +15,8 @@
     "docs",
     "package.json",
     "gruntfile.js",
-    ".gitignore"
+    ".gitignore",
+    "-dist.zip"
   ],
   "keywords": [
     "jquery",

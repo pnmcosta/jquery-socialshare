@@ -5,10 +5,10 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         clean: ['dist/*'],
         'string-replace': {
-            manifest: {
+            bower: {
                 files: [{
-                    src: 'src/manifest.json',
-                    dest: 'src/manifest.json'
+                    src: 'bower.json',
+                    dest: 'bower.json'
                 }],
                 options: {
                     replacements: [{
@@ -17,19 +17,11 @@ module.exports = function (grunt) {
                     },
                     {
                         pattern: /\"name\":\s\".*",/gi,
-                        replacement: '"name": "<%= pkg.title %>",'
+                        replacement: '"name": "<%= pkg.name %>",'
                     },
                     {
                         pattern: /\"description\":\s\".*",/gi,
                         replacement: '"description": "<%= pkg.description %>",'
-                    },
-                    {
-                        pattern: /\"homepage_url\":\s\".*",/gi,
-                        replacement: '"homepage_url": "<%= pkg.homepage %>",'
-                    },
-                    {
-                        pattern: /\"default_title\":\s\".*"/gi,
-                        replacement: '"default_title": "<%= pkg.title %>!"'
                     }]
                 }
             },
@@ -45,29 +37,6 @@ module.exports = function (grunt) {
                     }]
                 }
             }
-        },
-        crx: {
-            options: {
-                privateKey: "../../ssh/chrome-apps.pem",
-                maxBuffer: 3000 * 1024, //build extension with a weight up to 3MB
-                baseURL: "<%= pkg.homepage %>"
-            },
-            dist: {
-                files: {
-                    "dist/<%= pkg.name %>-<%= pkg.version %>.crx": [
-                        "src/**/*",
-                        "!.{git,svn}",
-                        "!*.pem",
-                    "!*.psd"
-                    ],
-                    "dist/<%= pkg.name %>-<%= pkg.version %>.zip": [
-                        "src/**/*",
-                        "!.{git,svn}",
-                        "!*.pem",
-                    "!*.psd"
-                    ]
-                }
-            }
         }
     });
 
@@ -78,6 +47,4 @@ module.exports = function (grunt) {
     // grunt bump-version --newver=X.Y.Z
     grunt.registerTask('bump-version', 'string-replace');
 
-     // Full distribution task.
-    grunt.registerTask('dist', ['clean', 'crx:dist']);
 };
