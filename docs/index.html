@@ -2,120 +2,124 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>jQuery Social Share</title>
-    <meta property="og:description" content="jquery-socialshare is simple and flexible social share jQuery plugin for any HTML anchor or buttons.">
-    <meta name="description" content="jquery-socialshare is simple and flexible social share jQuery plugin for any HTML anchor or buttons.">
-    <meta property="og:product:price:amount" content="100">
-    <meta name="twitter:creator" content="@pnmcosta">
+	<title>jQuery Social Share</title>
+	<meta property="og:description" content="Minimalist social sharing jQuery plugin, use any styles, themes, buttons or links.">
+	<meta name="description" content="Minimalist social sharing jQuery plugin, use any styles, themes, buttons or links.">
+	<meta property="og:product:price:amount" content="100">
+	<meta name="twitter:creator" content="@pnmcosta">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-    />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/css-social-buttons/1.3.0/css/zocial.css">
-    <style type="text/css">
-        body{padding:70px 0;}
-    </style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/css-social-buttons/1.3.0/css/zocial.css">
+	<style type="text/css">
+		body {
+			padding: 70px 0;
+		}
+	</style>
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
 
-            <!-- Collapsed navigation -->
-            <div class="navbar-header">
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<!-- Collapsed navigation -->
+			<div class="navbar-header">
+				<!-- Expander button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
 
-                <!-- Main title -->
-                <a class="navbar-brand" href=".">jQuery Social Share</a>
-            </div>
+				<!-- Main title -->
+				<a class="navbar-brand" href=".">jQuery Social Share</a>
+			</div>
 
-            <!-- Expanded navigation -->
-            <div class="navbar-collapse collapse">
+			<!-- Expanded navigation -->
+			<div class="navbar-collapse collapse">
 
-                <!-- Search, Navigation and Repo links -->
-                <ul class="nav navbar-nav navbar-right">
+				<!-- Search, Navigation and Repo links -->
+				<ul class="nav navbar-nav navbar-right">
 
 
 
-                    <li>
-                        <a href="https://github.com/pnmcosta/jquery-socialshare">
+					<li>
+						<a href="https://github.com/pnmcosta/jquery-socialshare">
 
-                            <i class="fa fa-github"></i> GitHub
-                        </a>
-                    </li>
+							<i class="fa fa-github"></i> GitHub
+						</a>
+					</li>
 
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <h1>Demo</h1>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<h1>jQuery Social Share</h1>
+		<p>Minimalist social sharing jQuery plugin, use any styles, themes, buttons or links. Includes templates and callbacks for popup `open` and `close` events.</p>
+		<p>This demo uses the <a href="http://zocial.smcllns.com/">[Zocial CSS social buttons</a> and <a href="http://getbootstrap.com/">Bootstra</a>			presentation purposes.</p>
+		<p>Full documentation on
+		<a href="https://github.com/pnmcosta/jquery-socialshare"><i class="fa fa-github"></i> GitHub</a>'s readme.</p>
+		<h2>Demo 1</h2>
+		<p>Set a CSS class to the element that matches a template.</p>
+		<div class="social-container">
 
-        <h2>Using CSS class</h2>
-        <p>Set a CSS class to the element that matches a template.</p>
-        <div class="social-container">
+			<a href="#" class="zocial amazon">Share with Amazon</a>
 
-            <a href="#" class="zocial amazon">Share with Amazon</a>
+			<a href="#" class="zocial blogger">Share with Blogger</a>
 
-            <a href="#" class="zocial blogger">Share with Blogger</a>
+			<a href="#" class="zocial buffer">Share with Buffer</a>
 
-            <a href="#" class="zocial buffer">Share with Buffer</a>
+			<a href="#" class="zocial delicious">Share with Delicious</a>
 
-            <a href="#" class="zocial delicious">Share with Delicious</a>
+			<a href="#" class="zocial digg">Share with Digg</a>
 
-            <a href="#" class="zocial digg">Share with Digg</a>
+			<a href="#" class="zocial evernote">Share with Evernote</a>
 
-            <a href="#" class="zocial evernote">Share with Evernote</a>
+			<a href="#" class="zocial facebook">Share with Facebook</a>
 
-            <a href="#" class="zocial facebook">Share with Facebook</a>
+			<a href="#" class="zocial googleplus">Share with GooglePlus</a>
 
-            <a href="#" class="zocial googleplus">Share with GooglePlus</a>
+			<a href="#" class="zocial linkedin">Share with LinkedIn</a>
 
-            <a href="#" class="zocial linkedin">Share with LinkedIn</a>
+			<a href="#" class="zocial pinterest">Share with Pinterest</a>
 
-            <a href="#" class="zocial pinterest">Share with Pinterest</a>
+			<a href="#" class="zocial pocket">Share with Pocket</a>
 
-            <a href="#" class="zocial pocket">Share with Pocket</a>
+			<a href="#" class="zocial quora">Share with Quora</a>
 
-            <a href="#" class="zocial quora">Share with Quora</a>
+			<a href="#" class="zocial reddit">Share with Reddit</a>
 
-            <a href="#" class="zocial reddit">Share with Reddit</a>
+			<a href="#" class="zocial stumbleupon">Share with StumbleUpon</a>
 
-            <a href="#" class="zocial stumbleupon">Share with StumbleUpon</a>
+			<a href="#" class="zocial tumblr">Share with Tumblr</a>
 
-            <a href="#" class="zocial tumblr">Share with Tumblr</a>
+			<a href="#" class="zocial twitter">Share with Twitter</a>
 
-            <a href="#" class="zocial twitter">Share with Twitter</a>
+			<a href="#" class="zocial email">Share by Email</a><br>
 
-            <a href="#" class="zocial email">Share by Email</a><br>
+			<a href="#" class="zocial acrobat custom">Share with a custom template</a>
 
-            <a href="#" class="zocial acrobat custom">Share with a custom template</a>
+		</div>
 
-        </div>
-    </div>
-    <div class="container">
-        <h2>Using Data Attributes</h2>
+		<h2>Demo 2</h2>
 
-        <p>Set a data attributes to the element to configure it.</p>
-        <div class="social-container">
-            <div><strong>Our Price:</strong> <span id="customprice">10.20</span></div>
+		<p>Set a <em>data-jqss-price-selector</em> data attribute to get the price from another element.</p>
+		<div class="social-container">
+			<div><strong>Our Price:</strong> <span id="customprice">10.20</span></div>
 
-            <a href="#" class="zocial amazon" data-jqss-price-selector="#customprice">Share with Amazon</a>
-        </div>
+			<a href="#" class="zocial amazon" data-jqss-price-selector="#customprice">Share with Amazon</a>
+		</div>
 
-        <h2>Code used in this demo</h2>
-       <pre><code>$(function () {
+		<h2>Javascript used in these demos</h2>
+		<pre><code>$(function () {
     $.fn.jqss.templates['custom'] = 'https://custom.com?u={{URL}}&amp;t={{TITLE}}';
     $.fn.jqss.ariaLabels['custom'] = 'Custom';
 
@@ -123,27 +127,20 @@
         url:'https://github.com/pnmcosta/jquery-socialshare'
     });
 });</code></pre>
-    </div>
-    <div class="container">
-        <h2>Documentation</h2>
-        Full documentation on <a href="https://github.com/pnmcosta/jquery-socialshare">
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="https://rawgit.com/pnmcosta/jquery-socialshare/master/dist/js/jquery-socialshare.min.js"></script>
+	<script>
+		$(function () {
+			$.fn.jqss.templates['custom'] = 'https://custom.com?u={{URL}}&t={{TITLE}}';
+			$.fn.jqss.ariaLabels['custom'] = 'Custom';
 
-                            <i class="fa fa-github"></i> GitHub
-                        </a> readme.
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="https://rawgit.com/pnmcosta/jquery-socialshare/master/dist/jquery-socialshare.min.js"></script>
-    <script>
-        $(function () {
-            $.fn.jqss.templates['custom'] = 'https://custom.com?u={{URL}}&t={{TITLE}}';
-            $.fn.jqss.ariaLabels['custom'] = 'Custom';
-
-            $(".social-container a").jqss({
-                url:'https://github.com/pnmcosta/jquery-socialshare'
-            });
-        });
-    </script>
+			$(".social-container a").jqss({
+				url: 'https://github.com/pnmcosta/jquery-socialshare'
+			});
+		});
+	</script>
 </body>
 
 </html>

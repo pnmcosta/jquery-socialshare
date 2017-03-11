@@ -5,8 +5,8 @@
     "Pedro Maia Costa <geral@pmcdigital.pt>"
   ],
   "homepage": "http://pnmcosta.github.io/jquery-socialshare",
-  "description": "jquery-socialshare is a simple and flexible social share jQuery plugin for any HTML anchor or buttons.",
-  "main": "./dist/jquery-socialshare.js",
+  "description": "Minimalist social sharing jQuery plugin, use any styles, themes, buttons or links.",
+  "main": "./dist/js/jquery-socialshare.js",
   "dependencies": {
     "jquery": ">=1.9.1"
   },
@@ -28,6 +28,7 @@
     "share",
     "sharing",
     "flexible",
-    "plugin"
+    "plugin",
+    "minimalist"
   ]
 }

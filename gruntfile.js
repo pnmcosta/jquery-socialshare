@@ -8,9 +8,11 @@ module.exports = function( grunt ) {
 		pkg: grunt.file.readJSON( "package.json" ),
 		banner: [
 			"/*!",
-			" * Social share jQuery plugin v<%= pkg.version %> (<%= pkg.homepage %>)",
+			" * Minimalist social sharing jQuery plugin v<%= pkg.version %> (<%= pkg.homepage %>)",
 			" *",
-			" * Licensed under the MIT License (https://opensource.org/licenses/MIT)",
+			" * MIT License (View LICENSE file with this package)",
+			" * ",
+			" * Copyright (c) 2017 Pedro Maia Costa <geral@pmcdigital.pt>",
 			" */"
 		].join( "\n" ) + "\n",
 
@@ -26,7 +28,7 @@ module.exports = function( grunt ) {
 				src: [ "src/**/*.js", "Gruntfile.js" ]
 			},
 			dist: {
-				src: "dist/<%= pkg.name %>.js"
+				src: "dist/js/<%= pkg.name %>.js"
 			}
 		},
 		concat: {
@@ -35,7 +37,7 @@ module.exports = function( grunt ) {
 			},
 			src: {
 				src: "src/<%= pkg.name %>.js",
-				dest: "dist/<%= pkg.name %>.js"
+				dest: "dist/js/<%= pkg.name %>.js"
 			}
 		},
 		uglify: {
@@ -44,14 +46,14 @@ module.exports = function( grunt ) {
 			},
 			src: {
 				src: "<%= concat.src.dest %>",
-				dest: "dist/<%= pkg.name %>.min.js"
+				dest: "dist/js/<%= pkg.name %>.min.js"
 			}
 		},
 		usebanner: {
 			options: {
 				banner: "<%= banner %>"
 			},
-			dist: "dist/*.js"
+			dist: "dist/js/*.js"
 		},
 		compress: {
 			dist: {
@@ -62,6 +64,9 @@ module.exports = function( grunt ) {
 					pretty: true
 				},
 				files: [
+					{
+						src: [ "README.md", "LICENSE", "package.json", "./docs/**" ]
+					},
 					{
 						expand: true,
 						cwd: "dist/",
@@ -98,8 +103,8 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "dist",
 		[
 			"clean",
-			"eslint:dist",
 			"concat:src",
+			"eslint:dist",
 			"uglify:src",
 			"usebanner:dist",
 			"compress:dist"

@@ -2,35 +2,31 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/pnmcosta/jquery-socialshare/master/LICENSE)
 
-jquery-socialshare is simple and flexible social share jQuery plugin for any HTML anchor or buttons.
+A minimalist social sharing jQuery plugin, use any styles, themes, buttons or links. Includes templates and callbacks for popup `open` and `close` events.
+
+View the [Online Demo](https://pnmcosta.github.io/jquery-socialshare/), it uses the [Zocial CSS social buttons](http://zocial.smcllns.com/) and [Bootstrap](http://getbootstrap.com) presentation purposes.
 
 Versions are incremented according to [semver](http://semver.org/).
-
-View the [Online Demo](https://pnmcosta.github.io/jquery-socialshare/), it uses the [Zocial CSS social buttons](http://zocial.smcllns.com/) for a better presentation.
 
 ## Requirements
 - [jQuery](https://jquery.com/) 1.9.1+
 
 ## Why?
-Because I always found it tricky to find the right social sharing plugin for the sites I develop at my daily job, either they relied on their own style, were uncustomizable, heavy and seemed to track everything!
+Because I always found it tricky to find the right social sharing plugin for the bespoke websites I develop at my daily job @[PMC-Digital](http://www.pmcdigital.pt/). The existing plugins either relied on their own themes, styling, were hard to customize or heavy!
 
-I also wanted to flexible and use any icon provider and CSS to be able customize the social sharing experience, open on a popup, and track when that popup was closed.
+I also wanted to get started with [Grunt](https://gruntjs.com/), [Bower](https://bower.io/) and the possibilities possibilities of developing with these tools.
 
 ## Installation
 
-Comming soon as a `release` and `bower` package.
-
-<!---
 You can install this package either from a `release` or `bower`.
 
 ### Release
-Download a compressed `*-dist` file from the [Releases Tab](https://github.com/pnmcosta/jquery-socialshare/releases)
+Download a compressed `*-dist.zip` file from the [Releases Tab](https://github.com/pnmcosta/jquery-socialshare/releases)
 
 ### Bower
 ```shell
 bower install jquery-socialshare --save
 ```
---->
 
 ## Usage
 
@@ -43,7 +39,7 @@ Include a `<script>` on your `html` file:
 Configure your links/buttons with a class for the corresponding template:
 ```html
 <div class="social-container">
-    <a href="javascript:;" class="facebook">Share on Facebook</a>
+    <a href="#" class="facebook">Share on Facebook</a>
     <button class="twitter">Share on Twitter</button>
 </div>
 ```
@@ -71,7 +67,7 @@ $(function () {
 });
 ```
 
-It supports all the options with the all uppercase option name `{{****}}` markup, the example above is using `{{URL}}` and `{{TITLE}}`.
+It supports options with the all uppercase option name in the `{{OPTIONNAME}}` markup, the example above is using `{{URL}}` and `{{TITLE}}`.
 
 ## Options
 
@@ -82,7 +78,7 @@ Options set via `data-attributes` override any options set via `javascript` when
 ### usePopup
 Boolean. Default: `true`
 
-Whether or not a popup is used or a new tab is opened.
+Whether or not a popup is used or a new window is opened instead.
 
 ### popupWidth
 Number. Default: `600`
@@ -137,7 +133,7 @@ The price that can be used as `{{PRICE}}` in a `template`.
 ### template
 String. Default: `null`.
 
-The template name to be used to select the `template`. This option is ignored if set via the plugin's initialization, however you can define it as `data-attribute` on each element if not making use of the `class` to determine the template to use.
+The template name to be used. This option is ignored if set via the plugin's initialization, however you can define it as `data-attribute` on each element if not making use of the `class` to determine the template to use. The `email` template type will not use a popup and the `onOpen` and `onClose` callbacks won't be called.
 
 ### imageSelector
 String. Default: `null`.
@@ -192,7 +188,7 @@ Boolean `callsback`. Default: `false`
 Method to `open` the element share template. The argument `callsback` determines whether the `onOpen` and `onClose` callback's should be called.
 
 ```javacript
-$('.social-container a.facebook').jqss('open')
+$('.social-container a.facebook').jqss('open');
 ```
 
 ### close(callsback)
@@ -201,5 +197,5 @@ Boolean `callsback`. Default: `false`
 Method to `close` the element share template if it is already open. The argument `callsback` determines whether the `onClose` callback should be called.
 
 ```javacript
-$('.social-container a.facebook').jqss('close')
+$('.social-container a.facebook').jqss('close');
 ```

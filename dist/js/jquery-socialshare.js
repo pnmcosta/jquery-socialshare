@@ -1,7 +1,9 @@
 /*!
- * Social share jQuery plugin v1.0.1 (http://pnmcosta.github.io/jquery-socialshare)
+ * Minimalist social sharing jQuery plugin v1.0.1 (http://pnmcosta.github.io/jquery-socialshare)
  *
- * Licensed under the MIT License (https://opensource.org/licenses/MIT)
+ * MIT License (View LICENSE file with this package)
+ * 
+ * Copyright (c) 2017 Pedro Maia Costa <geral@pmcdigital.pt>
  */
 
 ; ( function( $, window, undefined ) {

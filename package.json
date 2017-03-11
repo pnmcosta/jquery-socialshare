@@ -1,6 +1,6 @@
 {
   "name": "jquery-socialshare",
-  "description": "jquery-socialshare is a simple and flexible social share jQuery plugin for any HTML anchor or buttons.",
+  "description": "Minimalist social sharing jQuery plugin, use any styles, themes, buttons or links.",
   "version": "1.0.1",
   "license": "MIT",
   "keywords": [
@@ -11,7 +11,7 @@
     "flexible",
     "plugin"
   ],
-  "main": "./dist/jquery-socialshare.js",
+  "main": "./dist/js/jquery-socialshare.js",
   "files": [
     "dist",
     "docs",
@@ -23,7 +23,7 @@
   "bugs": "https://github.com/pnmcosta/jquery-socialshare/issues/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pnmcosta/jquery-socialshare.git"
+    "url": "git://github.com/pnmcosta/jquery-socialshare.git"
   },
   "peerDependencies": {
     "jquery": ">=1.9.1"
