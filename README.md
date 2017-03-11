@@ -75,7 +75,7 @@ $(function () {
 
 Most options can be provided via `data-attributes` on each element. An option can be converted to a `data-attribute` by taking its name, replacing each uppercase letter with its lowercase equivalent preceded by a dash, and prepending `data-jqss-` to the result. For example, `usePopup` would be `data-jqss-use-popup`, `template` would be `data-jqss-template`, and `ariaLabelPrefix` would be `data-jqss-aria-label-prefix`.
 
-Options set via `data-attributes` override any options set via `javascript` when initializing the plugin. Most options are global and would probably be set via `javascript`. The most common option to set with `data-attribute` on each element would be `template` in case you don't already specify it via a `class` that matches a template name. 
+Options set via `data-attributes` override any options set via `javascript` when initializing the plugin. Most options are global and would probably be set via `javascript`. The most common option to set with `data-attribute` on each element would be `template` in case you don't already specify it via a `class` that matches a template name.
 
 ### usePopup
 Boolean. Default: `true`
@@ -95,7 +95,7 @@ The popup's height.
 ### ariaLabelPrefix
 String. Default: `Share with`
 
-The prefix applied to the element when usign the `aria-label` defined for the template. 
+The prefix applied to the element when usign the `aria-label` defined for the template.
 
 ### url
 String. Default: `location.href`
@@ -158,7 +158,7 @@ String. Default: `Because I think you\'ll find it very interesting.%0A%0A"{{DESC
 The body to be used with the `email` mailto template. It supports all the options with the `{{****}}` markup.
 
 ### twitterSource
-String. Default: First value from meta tag(s) `[name='twitter:site'], [property='name:creator']` from the document's `head`.
+String. Default: First value from meta tag(s) `[property='twitter:creator'], [name='twitter:site']` from the document's `head`.
 
 The source to be used with the `twitter` template.
 
