@@ -1,9 +1,9 @@
 {
   "name": "jquery-socialshare",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0",
   "license": "MIT",
   "authors": [
-    "Pedro Costa"
+    "Pedro Maia Costa <geral@pmcdigital.pt>"
   ],
   "homepage": "http://pnmcosta.github.io/jquery-socialshare",
   "description": "jquery-socialshare is a simple and flexible social share jQuery plugin for any HTML anchor or buttons.",
@@ -16,7 +16,10 @@
     "package.json",
     "gruntfile.js",
     ".gitignore",
-    "-dist.zip"
+    "-dist.zip",
+		"*.json",
+		"!bower.json",
+		"!package.json"
   ],
   "keywords": [
     "jquery",

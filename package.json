@@ -1,7 +1,7 @@
 {
   "name": "jquery-socialshare",
   "description": "jquery-socialshare is a simple and flexible social share jQuery plugin for any HTML anchor or buttons.",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0",
   "license": "MIT",
   "keywords": [
     "jquery",
@@ -19,7 +19,8 @@
     "LICENSE"
   ],
   "homepage": "http://pnmcosta.github.io/jquery-socialshare",
-  "author": "Pedro Costa",
+  "author": "Pedro Maia Costa <geral@pmcdigital.pt>",
+  "bugs": "https://github.com/pnmcosta/jquery-socialshare/issues/",
   "repository": {
     "type": "git",
     "url": "https://github.com/pnmcosta/jquery-socialshare.git"
@@ -34,6 +35,7 @@
     "eslint-config-jquery": "1.0.0",
     "grunt": "latest",
     "grunt-banner": "^0.6.0",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-uglify": "^2.2.0",
