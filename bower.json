@@ -16,6 +16,7 @@
     ".gitignore",
     ".gitattributes",
     ".editorconfig",
+		".eslintignore",
     "-dist.zip",
 		"*.json",
 		"!bower.json",
