@@ -71,6 +71,8 @@ $(function () {
 });
 ```
 
+It supports all the options with the all uppercase option name `{{****}}` markup, the example above is using `{{URL}}` and `{{TITLE}}`.
+
 ## Options
 
 Most options can be provided via `data-attributes` on each element. An option can be converted to a `data-attribute` by taking its name, replacing each uppercase letter with its lowercase equivalent preceded by a dash, and prepending `data-jqss-` to the result. For example, `usePopup` would be `data-jqss-use-popup`, `template` would be `data-jqss-template`, and `ariaLabelPrefix` would be `data-jqss-aria-label-prefix`.
@@ -158,7 +160,7 @@ String. Default: `Because I think you\'ll find it very interesting.%0A%0A"{{DESC
 The body to be used with the `email` mailto template. It supports all the options with the `{{****}}` markup.
 
 ### twitterSource
-String. Default: First value from meta tag(s) `[property='twitter:creator'], [name='twitter:site']` from the document's `head`.
+String. Default: First value from meta tag(s) `[name='twitter:creator'], [name='twitter:site']` from the document's `head`.
 
 The source to be used with the `twitter` template.
 
