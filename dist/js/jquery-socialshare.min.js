@@ -1,5 +1,5 @@
 /*!
- * Minimalist social sharing jQuery plugin v1.0.1 (http://pnmcosta.github.io/jquery-socialshare)
+ * Minimalist social sharing jQuery plugin v1.0.2 (http://pnmcosta.github.io/jquery-socialshare)
  *
  * MIT License (View LICENSE file with this package)
  * 
