@@ -55,7 +55,7 @@
 		emailSubject: "I'm sharing \"{{TITLE}}\" with you",
 		emailBody: "Because I think you'll find it very interesting.%0A%0A\"{{DESCRIPTION}}\"%0A%0AClick this link {{URL}} for more info.",
 
-		twitterSource: ( $head.find( "[property='twitter:creator'], [name='twitter:site']" ).prop( "content" ) || "" ).replace( "@", "" ),
+		twitterSource: ( $head.find( "[name='twitter:creator'], [name='twitter:site']" ).prop( "content" ) || "" ).replace( "@", "" ),
 
 		onOpen: function() { },
 		onClose: function() { }
