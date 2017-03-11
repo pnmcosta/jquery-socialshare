@@ -1,6 +1,5 @@
 {
   "name": "jquery-socialshare",
-  "version": "1.0.1",
   "license": "MIT",
   "authors": [
     "Pedro Maia Costa <geral@pmcdigital.pt>"
@@ -12,10 +11,11 @@
     "jquery": ">=1.9.1"
   },
   "ignore": [
-    "docs",
-    "package.json",
-    "gruntfile.js",
+		"src",
+		"gruntfile.js",
     ".gitignore",
+    ".gitattributes",
+    ".editorconfig",
     "-dist.zip",
 		"*.json",
 		"!bower.json",

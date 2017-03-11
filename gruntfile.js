@@ -71,26 +71,6 @@ module.exports = function( grunt ) {
 			}
 		},
 		"string-replace": {
-			bower: {
-				files: [ {
-					src: "bower.json",
-					dest: "bower.json"
-				} ],
-				options: {
-					replacements: [ {
-						pattern: /\"version\":\s\"[0-9\.a-z].*",/gi,
-						replacement: "\"version\": \"" + grunt.option( "newver" ) + "\","
-					},
-					{
-						pattern: /\"name\":\s\".*",/gi,
-						replacement: "\"name\": \"<%= pkg.name %>\","
-					},
-					{
-						pattern: /\"description\":\s\".*",/gi,
-						replacement: "\"description\": \"<%= pkg.description %>\","
-					} ]
-				}
-			},
 			npm: {
 				files: [ {
 					src: "package.json",
