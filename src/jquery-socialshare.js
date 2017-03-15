@@ -6,7 +6,7 @@
  * =========================================================
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  *
- * Copyright (c) 2017 Pedro Costa
+ * Copyright (c) 2017 Pedro Maia Costa <geral@pmcdigital.pt>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,11 +40,27 @@
 		popupHeight: 450,
 
 		url: window.location.href,
-		siteUrl: window.location.origin || window.location.protocol + "//" + window.location.hostname + ( window.location.port ? ":" + window.location.port : "" ),
-		source: $head.find( "[name=site], [name=Site]" ).prop( "content" ) || window.document.title,
-		title: $head.find( "[name=title], [name=Title]" ).prop( "content" ) || window.document.title,
-		description: $head.find( "[name=description], [name=Description], [property='og:description'], [property='og:Description']" ).attr( "content" ) || window.document.title,
-		image: $head.find( "[name=image], [name=Image], [property='og:image'], [property='og:Image']" ).prop( "content" ) || $( "img:first" ).prop( "src" ) || "",
+		siteUrl: window.location.origin ||
+				window.location.protocol + "//" + window.location.hostname +
+				( window.location.port ? ":" + window.location.port : "" ),
+		source: $head.find( "[name='site'], [name='Site']" ).prop( "content" ) ||
+				window.document.title,
+		title: $head.find( "[name='title'], [name='Title']" ).prop( "content" ) ||
+				window.document.title,
+		description: $head.find( [
+									"[name='description']",
+									"[name='Description']",
+									"[property='og:description']",
+									"[property='og:Description']"
+								].join( ", " ) ).attr( "content" ) ||
+				window.document.title,
+		image: $head.find( [
+									"[name='image']",
+									"[name='Image']",
+									"[property='og:image']",
+									"[property='og:Image']"
+								].join( ", " ) ).prop( "content" ) ||
+				$( "img:first" ).prop( "src" ) || "",
 		price: $head.find( "[property='og:product:price:amount']" ).prop( "content" ) || "",
 		template: null,
 
@@ -52,9 +68,16 @@
 		priceSelector: null,
 
 		emailSubject: "I'm sharing \"{{TITLE}}\" with you",
-		emailBody: "Because I think you'll find it very interesting.%0A%0A\"{{DESCRIPTION}}\"%0A%0AClick this link {{URL}} for more info.",
-
-		twitterSource: ( $head.find( "[name='twitter:creator'], [name='twitter:site']" ).prop( "content" ) || "" ).replace( "@", "" ),
+		emailBody: [
+			"Because I think you'll find it very interesting.",
+			"\"{{DESCRIPTION}}\"",
+			"Click this link {{URL}} for more info."
+		].join( "%0A%0A" ), // %0A%0A is a line-break for email
+		twitterSource: ( $head.find( [
+									"[name='twitter:creator']",
+									"[name='twitter:site']"
+								].join( ", " ) ).prop( "content" ) || "" )
+								.replace( "@", "" ),
 
 		onOpen: function() { },
 		onClose: function() { }
@@ -67,7 +90,7 @@
 		counter: 100 // timeout in 20000ms
 	};
 
-	var _getElementOptions = function( el, prefix ) {
+	var _getDataOptions = function( el, prefix ) {
 		var data = $( el ).data(),
 			out = {}, inkey,
 			replace = new RegExp( "^" + prefix.toLowerCase() + "([A-Z])" );
@@ -85,7 +108,7 @@
 		return out;
 	};
 
-	var _setElementShare = function() {
+	var _setTemplate = function() {
 		this.templateName = this.settings.template;
 
 		// determine template from class if not yet set in settings
@@ -126,7 +149,8 @@
 
 		// handle the special case for email template
 		if ( "email" === this.templateName ) {
-			this.template = emailTemplate.replace( "{{SUBJECT}}", this.settings.emailSubject ).replace( "{{BODY}}", this.settings.emailBody );
+			this.template = emailTemplate.replace( "{{EMAILSUBJECT}}", this.settings.emailSubject )
+											.replace( "{{EMAILSUBJECT}}", this.settings.emailBody );
 		}
 
 		// if a custom imageSelector is set, ensure it updates the image setting
@@ -176,7 +200,7 @@
 		options.template = null;
 
 		// Options priority: js options, element data attrs, defaults
-		var elopts = _getElementOptions( this.$element, pluginName );
+		var elopts = _getDataOptions( this.$element, pluginName );
 		this.settings = $.extend( {}, defaults, elopts, options );
 		this.enabled = false;
 		this.template = null;
@@ -194,7 +218,7 @@
 
 	$.extend( jqssPlugin.prototype, {
 		init: function() {
-			_setElementShare.call( this );
+			_setTemplate.call( this );
 
 			// handle click if enabled and not email template
 			if ( this.enabled && "email" !== this.settings.template ) {
@@ -215,16 +239,20 @@
 
 			if ( this.settings.usePopup ) {
 
-				var dualScreenLeft = "undefined" !== window.screenLeft ? window.screenLeft : window.screen.left;
-				var dualScreenTop = "undefined" !== window.screenTop ? window.screenTop : window.screen.top;
+				var dualScreenLeft = "undefined" !== window.screenLeft ?
+										window.screenLeft : window.screen.left;
+				var dualScreenTop = "undefined" !== window.screenTop ?
+										window.screenTop : window.screen.top;
 
-				var left = ( ( $( window ).width() / 2 ) - ( this.settings.popupWidth / 2 ) ) + dualScreenLeft,
-					top = ( ( $( window ).height() / 2 ) - ( this.settings.popupHeight / 2 ) ) + dualScreenTop;
+				var left = ( ( $( window ).width() / 2 ) -
+							( this.settings.popupWidth / 2 ) ) + dualScreenLeft,
+					top = ( ( $( window ).height() / 2 ) -
+							( this.settings.popupHeight / 2 ) ) + dualScreenTop;
 
 				this._shareWin = window.open( this.href, this._pluginName + "_" + this.uniqueId,
-					"scrollbars=yes,toolbar=0,scrollbars=1,resizable=1,width=" +
-					this.settings.popupWidth + ",height=" +
-					this.settings.popupHeight + ",top=" + top + ",left=" + left );
+									"scrollbars=yes,toolbar=0,scrollbars=1,resizable=1,width=" +
+									this.settings.popupWidth + ",height=" +
+									this.settings.popupHeight + ",top=" + top + ",left=" + left );
 				if ( window.focus ) {
 					this._shareWin.focus();
 				}
@@ -258,7 +286,9 @@
 			return this.$element;
 		},
 		close: function( callsback ) {
-			if ( ( !this.enabled || ( this._shareWin || this._shareWin.closed === false ) ) || "email" === this.settings.template ) {
+			if ( ( !this.enabled ||
+					( this._shareWin || this._shareWin.closed === false ) ) ||
+					"email" === this.settings.template ) {
 				return this.$element;
 			}
 

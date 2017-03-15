@@ -14,7 +14,7 @@ Versions are incremented according to [semver](http://semver.org/).
 ## Why?
 Because I always found it tricky to find the right social sharing plugin for the bespoke websites I develop at my daily job @[PMC-Digital](http://www.pmcdigital.pt/). The existing plugins either relied on their own themes, styling, were hard to customize or heavy!
 
-I also wanted to get started with [Grunt](https://gruntjs.com/), [Bower](https://bower.io/) and the possibilities possibilities of developing with these tools.
+I also wanted to get started with [Grunt](https://gruntjs.com/), [Bower](https://bower.io/) and the possibilities of developing with these tools.
 
 ## Installation
 
