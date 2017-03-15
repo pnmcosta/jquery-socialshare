@@ -38,7 +38,6 @@
 		usePopup: true,
 		popupWidth: 600,
 		popupHeight: 450,
-		ariaLabelPrefix: "Share with",
 
 		url: window.location.href,
 		siteUrl: window.location.origin || window.location.protocol + "//" + window.location.hostname + ( window.location.port ? ":" + window.location.port : "" ),
@@ -165,9 +164,6 @@
 			}
 		}
 
-		if ( "undefined" !== ariaLabels[ this.templateName ] ) {
-			this.$element.attr( "aria-label", this.settings.ariaLabelPrefix + " " + ariaLabels[ this.templateName ] );
-		}
 		this.settings.template = this.templateName;
 		this.enabled = true;
 	};
@@ -226,9 +222,9 @@
 					top = ( ( $( window ).height() / 2 ) - ( this.settings.popupHeight / 2 ) ) + dualScreenTop;
 
 				this._shareWin = window.open( this.href, this._pluginName + "_" + this.uniqueId,
-												"scrollbars=yes,toolbar=0,scrollbars=1,resizable=1,width=" +
-												this.settings.popupWidth + ",height=" +
-												this.settings.popupHeight + ",top=" + top + ",left=" + left );
+					"scrollbars=yes,toolbar=0,scrollbars=1,resizable=1,width=" +
+					this.settings.popupWidth + ",height=" +
+					this.settings.popupHeight + ",top=" + top + ",left=" + left );
 				if ( window.focus ) {
 					this._shareWin.focus();
 				}
@@ -326,25 +322,5 @@
 		facebook: "https://www.facebook.com/sharer/sharer.php?u={{URL}}",
 		twitter: "https://twitter.com/intent/tweet?text={{TITLE}}&url={{URL}}&via={{TWITTERSOURCE}}",
 		googleplus: "https://plus.google.com/share?url={{URL}}"
-	};
-
-	var ariaLabels = $.fn[ pluginName ].ariaLabels = {
-		amazon: "Amazon Wish List",
-		blogger: "Blogger",
-		buffer: "Buffer",
-		delicious: "Delicious",
-		digg: "Digg",
-		evernote: "Evernote",
-		pinterest: "Pinterest",
-		pocket: "Pocket",
-		quora: "Quora",
-		reddit: "reddit",
-		stumbleupon: "StumbleUpon",
-		tumblr: "Tumblr",
-		email: "Email",
-		linkedin: "LinkedIn",
-		facebook: "Facebook",
-		twitter: "Twitter",
-		googleplus: "Google Plus"
 	};
 } )( jQuery, window );

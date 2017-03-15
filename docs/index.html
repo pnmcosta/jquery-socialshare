@@ -64,48 +64,48 @@
 	<div class="container">
 		<h1>jQuery Social Share</h1>
 		<p>Minimalist social sharing jQuery plugin, use any styles, themes, buttons or links. Includes templates and callbacks for popup `open` and `close` events.</p>
-		<p>This demo uses the <a href="http://zocial.smcllns.com/">[Zocial CSS social buttons</a> and <a href="http://getbootstrap.com/">Bootstra</a>			presentation purposes.</p>
+		<p>This demo uses the <a href="http://zocial.smcllns.com/">Zocial CSS social buttons</a> and <a href="http://getbootstrap.com/">Bootstrap</a> for presentation purposes, these are not required and you can use the plugin without them.</p>
 		<p>Full documentation on
 		<a href="https://github.com/pnmcosta/jquery-socialshare"><i class="fa fa-github"></i> GitHub</a>'s readme.</p>
 		<h2>Demo 1</h2>
 		<p>Set a CSS class to the element that matches a template.</p>
 		<div class="social-container">
 
-			<a href="#" class="zocial amazon">Share with Amazon</a>
+			<a href="#" class="zocial amazon" aria-label="Share this page with Amazon Wish List" role="button">Share with Amazon Wish List</a>
 
-			<a href="#" class="zocial blogger">Share with Blogger</a>
+			<a href="#" class="zocial blogger" aria-label="Share this page with Blogger" role="button">Share with Blogger</a>
 
-			<a href="#" class="zocial buffer">Share with Buffer</a>
+			<a href="#" class="zocial buffer" aria-label="Share this page with Buffer" role="button">Share with Buffer</a>
 
-			<a href="#" class="zocial delicious">Share with Delicious</a>
+			<a href="#" class="zocial delicious" aria-label="Share this page with Blogger" role="button">Share with Delicious</a>
 
-			<a href="#" class="zocial digg">Share with Digg</a>
+			<a href="#" class="zocial digg" aria-label="Share this page with Digg" role="button">Share with Digg</a>
 
-			<a href="#" class="zocial evernote">Share with Evernote</a>
+			<a href="#" class="zocial evernote" aria-label="Share this page with Evernote" role="button">Share with Evernote</a>
 
-			<a href="#" class="zocial facebook">Share with Facebook</a>
+			<a href="#" class="zocial facebook" aria-label="Share this page with Facebook" role="button">Share with Facebook</a>
 
-			<a href="#" class="zocial googleplus">Share with GooglePlus</a>
+			<a href="#" class="zocial googleplus" aria-label="Share this page with Google+" role="button">Share with Google+</a>
 
-			<a href="#" class="zocial linkedin">Share with LinkedIn</a>
+			<a href="#" class="zocial linkedin" aria-label="Share this page with LinkedIn" role="button">Share with LinkedIn</a>
 
-			<a href="#" class="zocial pinterest">Share with Pinterest</a>
+			<a href="#" class="zocial pinterest" aria-label="Share this page with Pinterest" role="button">Share with Pinterest</a>
 
-			<a href="#" class="zocial pocket">Share with Pocket</a>
+			<a href="#" class="zocial pocket" aria-label="Share this page with Pocket" role="button">Share with Pocket</a>
 
-			<a href="#" class="zocial quora">Share with Quora</a>
+			<a href="#" class="zocial quora" aria-label="Share this page with Quora" role="button">Share with Quora</a>
 
-			<a href="#" class="zocial reddit">Share with Reddit</a>
+			<a href="#" class="zocial reddit" aria-label="Share this page with Reddit" role="button">Share with Reddit</a>
 
-			<a href="#" class="zocial stumbleupon">Share with StumbleUpon</a>
+			<a href="#" class="zocial stumbleupon" aria-label="Share this page with StumbleUpon" role="button">Share with StumbleUpon</a>
 
-			<a href="#" class="zocial tumblr">Share with Tumblr</a>
+			<a href="#" class="zocial tumblr" aria-label="Share this page with Tumblr" role="button">Share with Tumblr</a>
 
-			<a href="#" class="zocial twitter">Share with Twitter</a>
+			<a href="#" class="zocial twitter" aria-label="Share this page with Twitter" role="button">Share with Twitter</a>
 
-			<a href="#" class="zocial email">Share by Email</a><br>
+			<a href="#" class="zocial email" aria-label="Share this page by Email" role="button">Share by Email</a><br>
 
-			<a href="#" class="zocial acrobat custom">Share with a custom template</a>
+			<a href="#" class="zocial acrobat custom" aria-label="Share this page with a Custom Template" role="button">Share with a custom template</a>
 
 		</div>
 
@@ -115,13 +115,12 @@
 		<div class="social-container">
 			<div><strong>Our Price:</strong> <span id="customprice">10.20</span></div>
 
-			<a href="#" class="zocial amazon" data-jqss-price-selector="#customprice">Share with Amazon</a>
+			<a href="#" class="zocial amazon" data-jqss-price-selector="#customprice" aria-label="Share this page with Amazon Wish List" role="button">Share with Amazon</a>
 		</div>
 
 		<h2>Javascript used in these demos</h2>
 		<pre><code>$(function () {
     $.fn.jqss.templates['custom'] = 'https://custom.com?u={{URL}}&amp;t={{TITLE}}';
-    $.fn.jqss.ariaLabels['custom'] = 'Custom';
 
     $(".social-container a").jqss({
         url:'https://github.com/pnmcosta/jquery-socialshare'
@@ -130,11 +129,10 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="https://rawgit.com/pnmcosta/jquery-socialshare/master/dist/js/jquery-socialshare.min.js"></script>
+	<script src="../dist/js/jquery-socialshare.min.js"></script>
 	<script>
 		$(function () {
 			$.fn.jqss.templates['custom'] = 'https://custom.com?u={{URL}}&t={{TITLE}}';
-			$.fn.jqss.ariaLabels['custom'] = 'Custom';
 
 			$(".social-container a").jqss({
 				url: 'https://github.com/pnmcosta/jquery-socialshare'

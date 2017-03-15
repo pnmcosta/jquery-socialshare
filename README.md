@@ -39,8 +39,8 @@ Include a `<script>` on your `html` file:
 Configure your links/buttons with a class for the corresponding template:
 ```html
 <div class="social-container">
-    <a href="#" class="facebook">Share on Facebook</a>
-    <button class="twitter">Share on Twitter</button>
+    <a href="#" class="facebook" aria-label="Share this page with Facebook" role="button">Share on Facebook</a>
+    <button class="twitter" aria-label="Share this page with Twitter">Share on Twitter</button>
 </div>
 ```
 
@@ -61,7 +61,6 @@ You can add additional `templates` before initializing the plugin:
 ```javascript
 $(function () {
     $.fn.jqss.templates['custom'] = 'https://custom.com?u={{URL}}&t={{TITLE}}';
-    $.fn.jqss.ariaLabels['custom'] = 'Custom';
 
     $(".social-container a, .social-container button").jqss();
 });
