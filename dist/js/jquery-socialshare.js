@@ -1,5 +1,5 @@
 /*!
- * Minimalist social sharing jQuery plugin v1.0.2 (http://pnmcosta.github.io/jquery-socialshare)
+ * Minimalist social sharing jQuery plugin v1.0.3 (http://pnmcosta.github.io/jquery-socialshare)
  *
  * MIT License (View LICENSE file with this package)
  * 
@@ -11,7 +11,12 @@
 	"use strict";
 
 	var pluginName = "jqss",
-		$head = $( window.document.head );
+		$head = $( window.document.head ),
+		emailTemplate = "mailto:?subject={{SUBJECT}}&body={{BODY}}",
+		timerOptions = {
+			internal: 200,
+			counter: 100 // timeout in 20000ms
+		};
 
 	var defaults = {
 		usePopup: true,
@@ -19,11 +24,27 @@
 		popupHeight: 450,
 
 		url: window.location.href,
-		siteUrl: window.location.origin || window.location.protocol + "//" + window.location.hostname + ( window.location.port ? ":" + window.location.port : "" ),
-		source: $head.find( "[name=site], [name=Site]" ).prop( "content" ) || window.document.title,
-		title: $head.find( "[name=title], [name=Title]" ).prop( "content" ) || window.document.title,
-		description: $head.find( "[name=description], [name=Description], [property='og:description'], [property='og:Description']" ).attr( "content" ) || window.document.title,
-		image: $head.find( "[name=image], [name=Image], [property='og:image'], [property='og:Image']" ).prop( "content" ) || $( "img:first" ).prop( "src" ) || "",
+		siteUrl: window.location.origin ||
+		window.location.protocol + "//" + window.location.hostname +
+		( window.location.port ? ":" + window.location.port : "" ),
+		source: $head.find( "[name='site'], [name='Site']" ).prop( "content" ) ||
+		window.document.title,
+		title: $head.find( "[name='title'], [name='Title']" ).prop( "content" ) ||
+		window.document.title,
+		description: $head.find( [
+			"[name='description']",
+			"[name='Description']",
+			"[property='og:description']",
+			"[property='og:Description']"
+		].join( ", " ) ).attr( "content" ) ||
+		window.document.title,
+		image: $head.find( [
+			"[name='image']",
+			"[name='Image']",
+			"[property='og:image']",
+			"[property='og:Image']"
+		].join( ", " ) ).prop( "content" ) ||
+		$( "img:first" ).prop( "src" ) || "",
 		price: $head.find( "[property='og:product:price:amount']" ).prop( "content" ) || "",
 		template: null,
 
@@ -31,22 +52,22 @@
 		priceSelector: null,
 
 		emailSubject: "I'm sharing \"{{TITLE}}\" with you",
-		emailBody: "Because I think you'll find it very interesting.%0A%0A\"{{DESCRIPTION}}\"%0A%0AClick this link {{URL}} for more info.",
-
-		twitterSource: ( $head.find( "[name='twitter:creator'], [name='twitter:site']" ).prop( "content" ) || "" ).replace( "@", "" ),
+		emailBody: [
+			"Because I think you'll find it very interesting.",
+			"\"{{DESCRIPTION}}\"",
+			"Click this link {{URL}} for more info."
+		].join( "%0A%0A" ), // %0A%0A is a line-break for email
+		twitterSource: ( $head.find( [
+			"[name='twitter:creator']",
+			"[name='twitter:site']"
+		].join( ", " ) ).prop( "content" ) || "" )
+			.replace( "@", "" ),
 
 		onOpen: function() { },
 		onClose: function() { }
 	};
 
-	var emailTemplate = "mailto:?subject={{SUBJECT}}&body={{BODY}}";
-
-	var timerOptions = {
-		internal: 200,
-		counter: 100 // timeout in 20000ms
-	};
-
-	var _getElementOptions = function( el, prefix ) {
+	var _getDataOptions = function( el, prefix ) {
 		var data = $( el ).data(),
 			out = {}, inkey,
 			replace = new RegExp( "^" + prefix.toLowerCase() + "([A-Z])" );
@@ -64,7 +85,7 @@
 		return out;
 	};
 
-	var _setElementShare = function() {
+	var _setTemplate = function() {
 		this.templateName = this.settings.template;
 
 		// determine template from class if not yet set in settings
@@ -73,7 +94,7 @@
 
 			for ( var i = 0; i < classList.length; i++ ) {
 				var className = classList[ i ].toLowerCase();
-				if ( "undefined" !== typeof templates[ className ] ) {
+				if ( undefined !== templates[ className ] ) {
 					this.templateName = className;
 					this.template = templates[ className ];
 					break;
@@ -89,13 +110,14 @@
 				}
 				return;
 			}
-		} else if ( "undefined" !== typeof templates[ this.templateName ] ) {
+		} else if ( undefined !== templates[ this.templateName ] ) {
 			this.template = templates[ this.templateName ];
 		}
 
 		// throw error, template not found
 		if ( !this.template ) {
-			window.console.error( "[jqss] Could not find template \"" + this.templateName + "\" for element:" );
+			window.console.error( "[jqss] Could not find template \"" +
+				this.templateName + "\" for element:" );
 			window.console.log( this.element );
 			if ( this._isAnchor ) {
 				this.$element.prop( "href", "#" );
@@ -105,7 +127,8 @@
 
 		// handle the special case for email template
 		if ( "email" === this.templateName ) {
-			this.template = emailTemplate.replace( "{{SUBJECT}}", this.settings.emailSubject ).replace( "{{BODY}}", this.settings.emailBody );
+			this.template = emailTemplate.replace( "{{SUBJECT}}", this.settings.emailSubject )
+				.replace( "{{BODY}}", this.settings.emailBody );
 		}
 
 		// if a custom imageSelector is set, ensure it updates the image setting
@@ -128,9 +151,10 @@
 
 		// process template markup
 		for ( var _key in this.settings ) {
-			if ( "undefined" !== typeof this.settings[ _key ] ) {
+			if ( undefined !== this.settings[ _key ] ) {
 				var _value = encodeURIComponent( this.settings[ _key ] );
-				this.href = this.href.replace( new RegExp( "{{" + _key.toUpperCase() + "}}", "g" ), _value );
+				this.href = this.href.replace( new RegExp( "{{" +
+					_key.toUpperCase() + "}}", "g" ), _value );
 			}
 		}
 
@@ -151,11 +175,8 @@
 		this.element = element;
 		this.$element = $( this.element );
 
-		// ensure this option is not set as a js option.
-		options.template = null;
-
 		// Options priority: js options, element data attrs, defaults
-		var elopts = _getElementOptions( this.$element, pluginName );
+		var elopts = _getDataOptions( this.$element, pluginName );
 		this.settings = $.extend( {}, defaults, elopts, options );
 		this.enabled = false;
 		this.template = null;
@@ -173,7 +194,7 @@
 
 	$.extend( jqssPlugin.prototype, {
 		init: function() {
-			_setElementShare.call( this );
+			_setTemplate.call( this );
 
 			// handle click if enabled and not email template
 			if ( this.enabled && "email" !== this.settings.template ) {
@@ -190,15 +211,19 @@
 			if ( !this.enabled || "email" === this.settings.template ) {
 				return this.$element;
 			}
-			callsback = "undefined" !== callsback ? callsback : false;
+			callsback = undefined !== callsback ? callsback : false;
 
 			if ( this.settings.usePopup ) {
 
-				var dualScreenLeft = "undefined" !== window.screenLeft ? window.screenLeft : window.screen.left;
-				var dualScreenTop = "undefined" !== window.screenTop ? window.screenTop : window.screen.top;
+				var dualScreenLeft = undefined !== window.screenLeft ?
+					window.screenLeft : window.screen.left;
+				var dualScreenTop = undefined !== window.screenTop ?
+					window.screenTop : window.screen.top;
 
-				var left = ( ( $( window ).width() / 2 ) - ( this.settings.popupWidth / 2 ) ) + dualScreenLeft,
-					top = ( ( $( window ).height() / 2 ) - ( this.settings.popupHeight / 2 ) ) + dualScreenTop;
+				var left = ( ( $( window ).width() / 2 ) -
+					( this.settings.popupWidth / 2 ) ) + dualScreenLeft,
+					top = ( ( $( window ).height() / 2 ) -
+						( this.settings.popupHeight / 2 ) ) + dualScreenTop;
 
 				this._shareWin = window.open( this.href, this._pluginName + "_" + this.uniqueId,
 					"scrollbars=yes,toolbar=0,scrollbars=1,resizable=1,width=" +
@@ -237,11 +262,13 @@
 			return this.$element;
 		},
 		close: function( callsback ) {
-			if ( ( !this.enabled || ( this._shareWin || this._shareWin.closed === false ) ) || "email" === this.settings.template ) {
+			if ( ( !this.enabled ||
+				( this._shareWin || this._shareWin.closed === false ) ) ||
+				"email" === this.settings.template ) {
 				return this.$element;
 			}
 
-			callsback = "undefined" !== callsback ? callsback : false;
+			callsback = undefined !== callsback ? callsback : false;
 
 			this._shareWin.close();
 
@@ -263,8 +290,8 @@
 
 		var _items = this.each( function() {
 			var _plugin = $.data( this, "plugin_" + pluginName );
-			if ( "undefined" === typeof _plugin ) {
-				_plugin = new jqssPlugin( this, options );
+			if ( undefined === _plugin ) {
+				_plugin = new jqssPlugin( this, ( options || {} ) );
 				$.data( this, "plugin_" + pluginName, _plugin );
 			}
 
@@ -274,7 +301,7 @@
 		} );
 
 		if (
-			"undefined" === typeof _return ||
+			undefined === _return ||
 			_return instanceof jqssPlugin
 		) {
 			return _items;
@@ -290,16 +317,19 @@
 		delicious: "https://delicious.com/post?url={{URL}}&title={{TITLE}}&notes={{DESCRIPTION}}",
 		digg: "https://digg.com/submit?url={{URL}}&title={{TITLE}}",
 		evernote: "http://www.evernote.com/clip.action?url={{URL}}&title={{TITLE}}",
-		pinterest: "http://pinterest.com/pin/create/button/?url={{URL}}&media={{IMAGE}}&description={{DESCRIPTION}}",
+		pinterest: "http://pinterest.com/pin/create/button/?url={{URL}}" +
+		"&media={{IMAGE}}&description={{DESCRIPTION}}",
 		pocket: "https://getpocket.com/save?url={{URL}}&title={{TITLE}}",
 		quora: "http://www.quora.com/board/bookmarklet?v=1&url={{URL}}",
 		reddit: "http://www.reddit.com/submit?url={{URL}}&title={{TITLE}}",
 		stumbleupon: "http://www.stumbleupon.com/submit?url={{URL}}&title={{TITLE}}",
 		tumblr: "http://tumblr.com/widgets/share/tool?canonicalUrl={{URL}}",
 		email: "#",
-		linkedin: "http://www.linkedin.com/shareArticle?mini=true&ro=true&title={{TITLE}}&url={{URL}}&summary={{DESCRIPTION}}&source={{SOURCE}}&armin=armin",
+		linkedin: "http://www.linkedin.com/shareArticle?mini=true&ro=true" +
+		"&title={{TITLE}}&url={{URL}}&summary={{DESCRIPTION}}&source={{SOURCE}}&armin=armin",
 		facebook: "https://www.facebook.com/sharer/sharer.php?u={{URL}}",
-		twitter: "https://twitter.com/intent/tweet?text={{TITLE}}&url={{URL}}&via={{TWITTERSOURCE}}",
+		twitter: "https://twitter.com/intent/tweet?text={{TITLE}}" +
+		"&url={{URL}}&via={{TWITTERSOURCE}}",
 		googleplus: "https://plus.google.com/share?url={{URL}}"
 	};
 } )( jQuery, window );

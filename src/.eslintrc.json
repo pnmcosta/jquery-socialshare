@@ -1,15 +1,4 @@
 {
 	"root": true,
-	"extends": "../.eslintrc-browser.json",
-	"rules": {
-		"max-len": [
-			"error",
-			{
-				"code": 180, // I know! Cheating a bit :D
-				"ignoreComments": true,
-				"ignoreUrls": true,
-				"ignoreTemplateLiterals": true
-			}
-		]
-	}
+	"extends": "../.eslintrc-browser.json"
 }
