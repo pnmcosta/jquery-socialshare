@@ -36,6 +36,12 @@ Include a `<script>` on your `html` file:
 <script src="/your/path/to/jquery-socialshare.min.js"></script>
 ```
 
+or include it via CDN: 
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/jquery-socialshare/dist/js/jquery-socialshare.min.js"></script>
+```
+
 Configure your links/buttons with a class for the corresponding template:
 ```html
 <div class="social-container">
